@@ -1,0 +1,39 @@
+[gd_scene load_steps=2 format=3 uid="uid://n5ryatixlh88"]
+
+[ext_resource type="Texture2D" uid="uid://ibgiyglk1xkj" path="res://Battle_UI_Art/circle_white.png" id="1_6b0sm"]
+
+[node name="Enemies" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -793.0
+offset_top = 127.0
+offset_right = -793.0
+offset_bottom = 127.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="E1" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 1515.0
+offset_top = 304.0
+offset_right = 1627.0
+offset_bottom = 416.0
+texture_normal = ExtResource("1_6b0sm")
+
+[node name="E2" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 1245.0
+offset_top = 391.0
+offset_right = 1357.0
+offset_bottom = 503.0
+texture_normal = ExtResource("1_6b0sm")
+
+[node name="E3" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 1429.0
+offset_top = 495.0
+offset_right = 1541.0
+offset_bottom = 607.0
+texture_normal = ExtResource("1_6b0sm")

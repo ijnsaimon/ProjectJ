@@ -1,0 +1,47 @@
+[gd_scene load_steps=2 format=3 uid="uid://bfkkin2pfqxvc"]
+
+[ext_resource type="Texture2D" uid="uid://ibgiyglk1xkj" path="res://Battle_UI_Art/circle_white.png" id="1_4fixh"]
+
+[node name="Party" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 55.0
+offset_top = 51.0
+offset_right = 55.0
+offset_bottom = 51.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="P1" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 1256.0
+offset_top = 248.0
+offset_right = 1368.0
+offset_bottom = 360.0
+texture_normal = ExtResource("1_4fixh")
+
+[node name="P2" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 1299.0
+offset_top = 383.0
+offset_right = 1411.0
+offset_bottom = 495.0
+texture_normal = ExtResource("1_4fixh")
+
+[node name="P3" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 1432.0
+offset_top = 520.0
+offset_right = 1544.0
+offset_bottom = 632.0
+texture_normal = ExtResource("1_4fixh")
+
+[node name="P4" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 1471.0
+offset_top = 650.0
+offset_right = 1583.0
+offset_bottom = 762.0
+texture_normal = ExtResource("1_4fixh")

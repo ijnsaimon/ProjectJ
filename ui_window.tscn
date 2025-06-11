@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://1j1jis50q27i"]
+
+[ext_resource type="Texture2D" uid="uid://4knhfr4pqn6y" path="res://Battle_UI_Art/dot_for_menus.png" id="1_3b20g"]
+[ext_resource type="Script" uid="uid://bfatn16o8c6ju" path="res://UiWindow.cs" id="2_17knq"]
+
+[node name="UI_Window" type="NinePatchRect"]
+size_flags_horizontal = 3
+texture = ExtResource("1_3b20g")
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 9
+script = ExtResource("2_17knq")
