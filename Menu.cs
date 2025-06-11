@@ -21,6 +21,16 @@ public partial class Menu : Container
 				button.Pressed += () => OnButtonPressed(button);
 			}
 		}
+		String _class = GetClass();
+		List<Node> buttons = GetButtons();
+		bool grid_containers = false;
+		if(this is GridContainer container){
+			List<Node> top_row = new List<Node> {};
+			List<Node> bottom_row = new List<Node> {};
+			int columns = container.GetColumns();
+			int rows = Math.Round(buttons.size() / columns);
+			List<Node> btm_range = new List[rows*columns - columns, rows * columns - 1];
+		}
 	}
 	public List<Node> GetButtons(){
 		return new List<Node>(GetChildren());
@@ -34,10 +44,10 @@ public partial class Menu : Container
 	}
 	public void OnButtonFocused(Button button)
 	{
-		EmitSignal(SignalName.ButtonFocusedEventHandler, button);
+		EmitSignal(SignalName.ButtonFocused, button);
 	}
 	public void OnButtonPressed(Button button)
 	{
-		EmitSignal(SignalName.ButtonPressedEventHandler, button);
+		EmitSignal(SignalName.ButtonPressed, button);
 	}
 }

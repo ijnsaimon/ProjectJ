@@ -9,12 +9,14 @@ public partial class battle : Control
 	{
 		options = GetNode<UiWindow>("Options");
 		optionsmenu = GetNode<Menu>("Options/BattleOptionsVbox");
+		optionsmenu.ButtonPressed += OnOptionsButtonPressed;
+		optionsmenu.ButtonFocused += OnOptionsButtonFocused;
 		optionsmenu.ButtonFocus(0);
 	}
 	public void OnOptionsButtonFocused(BaseButton button){
 		
 	}
-	public void OnOptionButtonPressed(Button button){
+	public void OnOptionsButtonPressed(Button button){
 		GD.Print(button.Text);
 	}
 }
