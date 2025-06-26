@@ -1,11 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://c078fj7fpvgen"]
+[gd_scene load_steps=12 format=3 uid="uid://c078fj7fpvgen"]
 
 [ext_resource type="Theme" uid="uid://bfvuuvvtsv3ph" path="res://default_theme.tres" id="1_7sfm4"]
 [ext_resource type="Script" uid="uid://bhwp14cx033at" path="res://battle.cs" id="2_6t8i5"]
 [ext_resource type="PackedScene" uid="uid://1j1jis50q27i" path="res://ui_window.tscn" id="2_i431l"]
 [ext_resource type="FontFile" uid="uid://c528qixkhipon" path="res://fonts/upheavtt.ttf" id="3_6t8i5"]
-[ext_resource type="Texture2D" uid="uid://ibgiyglk1xkj" path="res://Battle_UI_Art/circle_white.png" id="5_6t8i5"]
+[ext_resource type="Script" uid="uid://clv461gm4ni41" path="res://ControlMenu.cs" id="4_0npn6"]
+[ext_resource type="PackedScene" uid="uid://1nm2b0x5qpem" path="res://player_bar.tscn" id="4_mhv3b"]
 [ext_resource type="Script" uid="uid://bk4aa7f553foo" path="res://Menu.cs" id="5_dw4jg"]
+[ext_resource type="PackedScene" uid="uid://djccj7af31v65" path="res://Player.tscn" id="6_b1i6x"]
+[ext_resource type="PackedScene" uid="uid://bomu4vtsy5dpt" path="res://battle_enemy.tscn" id="7_ol6im"]
+[ext_resource type="Script" uid="uid://c4r4eqye6mqt5" path="res://BattlePlayer.cs" id="7_sl0w2"]
+[ext_resource type="PackedScene" uid="uid://cm7rgn1s8qcod" path="res://cursor.tscn" id="9_lcjiy"]
 
 [node name="Battle" type="Control"]
 layout_mode = 3
@@ -46,9 +51,62 @@ alignment = 1
 [node name="Enemies" parent="BattleMenu" instance=ExtResource("2_i431l")]
 layout_mode = 2
 
+[node name="Margin" type="MarginContainer" parent="BattleMenu/Enemies"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -186.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Enemies" type="VBoxContainer" parent="BattleMenu/Enemies/Margin"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="Label" type="Label" parent="BattleMenu/Enemies/Margin/Enemies"]
+layout_mode = 2
+theme = ExtResource("1_7sfm4")
+text = "Enemy"
+
+[node name="Label2" type="Label" parent="BattleMenu/Enemies/Margin/Enemies"]
+layout_mode = 2
+theme = ExtResource("1_7sfm4")
+text = "Enemy"
+
+[node name="Label3" type="Label" parent="BattleMenu/Enemies/Margin/Enemies"]
+layout_mode = 2
+theme = ExtResource("1_7sfm4")
+text = "Enemy"
+
 [node name="Players" parent="BattleMenu" instance=ExtResource("2_i431l")]
 layout_mode = 2
 size_flags_stretch_ratio = 1.86
+
+[node name="Margin" type="MarginContainer" parent="BattleMenu/Players"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Players" type="VBoxContainer" parent="BattleMenu/Players/Margin"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="PlayerBar" parent="BattleMenu/Players/Margin/Players" instance=ExtResource("4_mhv3b")]
+layout_mode = 2
+
+[node name="PlayerBar2" parent="BattleMenu/Players/Margin/Players" instance=ExtResource("4_mhv3b")]
+layout_mode = 2
+
+[node name="PlayerBar3" parent="BattleMenu/Players/Margin/Players" instance=ExtResource("4_mhv3b")]
+layout_mode = 2
+
+[node name="PlayerBar4" parent="BattleMenu/Players/Margin/Players" instance=ExtResource("4_mhv3b")]
+layout_mode = 2
 
 [node name="Party" type="Control" parent="."]
 self_modulate = Color(0, 1, 0, 1)
@@ -56,99 +114,92 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 55.0
-offset_top = 51.0
-offset_right = 55.0
-offset_bottom = 51.0
+offset_left = 1211.0
+offset_top = 209.0
+offset_right = -301.0
+offset_bottom = -291.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("4_0npn6")
 
-[node name="P1" type="TextureButton" parent="Party"]
-self_modulate = Color(0, 1, 0, 1)
+[node name="P1" parent="Party" instance=ExtResource("6_b1i6x")]
 layout_mode = 0
-offset_left = 1256.0
-offset_top = 248.0
-offset_right = 1368.0
-offset_bottom = 360.0
-texture_normal = ExtResource("5_6t8i5")
+offset_left = 34.0
+offset_top = 12.9997
+offset_right = 146.0
+offset_bottom = 125.0
+script = ExtResource("7_sl0w2")
 
-[node name="P2" type="TextureButton" parent="Party"]
-self_modulate = Color(0, 1, 0, 1)
+[node name="P2" parent="Party" instance=ExtResource("6_b1i6x")]
 layout_mode = 0
-offset_left = 1299.0
-offset_top = 383.0
-offset_right = 1411.0
-offset_bottom = 495.0
-texture_normal = ExtResource("5_6t8i5")
+offset_left = 86.0
+offset_top = 143.0
+offset_right = 198.0
+offset_bottom = 255.0
+script = ExtResource("7_sl0w2")
 
-[node name="P3" type="TextureButton" parent="Party"]
-self_modulate = Color(0, 1, 0, 1)
+[node name="P3" parent="Party" instance=ExtResource("6_b1i6x")]
 layout_mode = 0
-offset_left = 1432.0
-offset_top = 520.0
-offset_right = 1544.0
-offset_bottom = 632.0
-texture_normal = ExtResource("5_6t8i5")
+offset_left = 131.0
+offset_top = 259.0
+offset_right = 243.0
+offset_bottom = 371.0
+script = ExtResource("7_sl0w2")
 
-[node name="P4" type="TextureButton" parent="Party"]
-self_modulate = Color(0, 1, 0, 1)
+[node name="P4" parent="Party" instance=ExtResource("6_b1i6x")]
 layout_mode = 0
-offset_left = 1471.0
-offset_top = 650.0
-offset_right = 1583.0
-offset_bottom = 762.0
-texture_normal = ExtResource("5_6t8i5")
+offset_left = 185.0
+offset_top = 369.0
+offset_right = 297.0
+offset_bottom = 481.0
+script = ExtResource("7_sl0w2")
 
 [node name="Enemies" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -793.0
-offset_top = 127.0
-offset_right = -793.0
-offset_bottom = 127.0
+offset_left = 259.0
+offset_top = 352.0
+offset_right = -1261.0
+offset_bottom = -358.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("4_0npn6")
 
-[node name="E1" type="TextureButton" parent="Enemies"]
-self_modulate = Color(1, 0, 0, 1)
+[node name="E1" parent="Enemies" instance=ExtResource("7_ol6im")]
 layout_mode = 0
-offset_left = 1515.0
-offset_top = 304.0
-offset_right = 1627.0
-offset_bottom = 416.0
-texture_normal = ExtResource("5_6t8i5")
+offset_left = 64.0
+offset_top = 68.9997
+offset_right = 176.0
+offset_bottom = 181.0
 
-[node name="E2" type="TextureButton" parent="Enemies"]
-self_modulate = Color(1, 0, 0, 1)
+[node name="E2" parent="Enemies" instance=ExtResource("7_ol6im")]
 layout_mode = 0
-offset_left = 1245.0
-offset_top = 391.0
-offset_right = 1357.0
-offset_bottom = 503.0
-texture_normal = ExtResource("5_6t8i5")
+offset_left = 242.0
+offset_top = 79.9997
+offset_right = 354.0
+offset_bottom = 192.0
 
-[node name="E3" type="TextureButton" parent="Enemies"]
-self_modulate = Color(1, 0, 0, 1)
+[node name="E3" parent="Enemies" instance=ExtResource("7_ol6im")]
 layout_mode = 0
-offset_left = 1429.0
-offset_top = 495.0
-offset_right = 1541.0
-offset_bottom = 607.0
-texture_normal = ExtResource("5_6t8i5")
+offset_left = 114.0
+offset_top = 219.0
+offset_right = 226.0
+offset_bottom = 331.0
 
 [node name="Options" parent="." instance=ExtResource("2_i431l")]
-custom_minimum_size = Vector2(240, 240)
+custom_minimum_size = Vector2(180, 240)
 layout_mode = 2
 anchor_top = 0.0227273
 anchor_bottom = 0.0227273
-offset_left = 566.0
+offset_left = 625.0
 offset_top = 835.0
-offset_right = 806.0
+offset_right = 805.0
 offset_bottom = 1075.0
+grow_horizontal = 2
+grow_vertical = 0
 size_flags_stretch_ratio = 1.86
-metadata/_edit_use_anchors_ = true
 
 [node name="BattleOptionsVbox" type="VBoxContainer" parent="Options"]
 layout_mode = 1
@@ -171,6 +222,7 @@ texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 2
+theme = ExtResource("1_7sfm4")
 theme_type_variation = &"FlatButton"
 theme_override_colors/font_color = Color(0.67451, 0.196078, 0.196078, 1)
 theme_override_fonts/font = ExtResource("3_6t8i5")
@@ -183,6 +235,7 @@ texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 2
+theme = ExtResource("1_7sfm4")
 theme_type_variation = &"FlatButton"
 theme_override_colors/font_color = Color(0.67451, 0.196078, 0.196078, 1)
 theme_override_fonts/font = ExtResource("3_6t8i5")
@@ -195,6 +248,7 @@ texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 2
+theme = ExtResource("1_7sfm4")
 theme_type_variation = &"FlatButton"
 theme_override_colors/font_color = Color(0.67451, 0.196078, 0.196078, 1)
 theme_override_fonts/font = ExtResource("3_6t8i5")
@@ -207,6 +261,7 @@ texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 2
+theme = ExtResource("1_7sfm4")
 theme_type_variation = &"FlatButton"
 theme_override_colors/font_color = Color(0.67451, 0.196078, 0.196078, 1)
 theme_override_fonts/font = ExtResource("3_6t8i5")
@@ -219,9 +274,44 @@ texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 2
+theme = ExtResource("1_7sfm4")
 theme_type_variation = &"FlatButton"
 theme_override_colors/font_color = Color(0.67451, 0.196078, 0.196078, 1)
 theme_override_fonts/font = ExtResource("3_6t8i5")
 theme_override_font_sizes/font_size = 28
 action_mode = 0
 text = "Run"
+
+[node name="MagicOptions" parent="." instance=ExtResource("2_i431l")]
+custom_minimum_size = Vector2(320, 240)
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.0227273
+anchor_bottom = 0.0227273
+offset_left = 480.0
+offset_top = 835.0
+offset_right = 780.0
+offset_bottom = 1075.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_stretch_ratio = 1.86
+theme = ExtResource("1_7sfm4")
+
+[node name="Spells" type="VBoxContainer" parent="MagicOptions"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -54.5
+offset_top = -105.0
+offset_right = 54.5
+offset_bottom = 105.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_7sfm4")
+script = ExtResource("5_dw4jg")
+
+[node name="Cursor" parent="." instance=ExtResource("9_lcjiy")]
+layout_mode = 1

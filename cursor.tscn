@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://cm7rgn1s8qcod"]
+
+[ext_resource type="Texture2D" uid="uid://fv3va25bl21e" path="res://Battle_UI_Art/arrow.png" id="1_fsq4c"]
+[ext_resource type="Script" uid="uid://dw6b5n87v8cyf" path="res://Cursor.cs" id="2_5l68f"]
+
+[node name="Cursor" type="TextureRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 27.0
+offset_right = -1893.0
+offset_bottom = -1026.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -1.5708
+texture = ExtResource("1_fsq4c")
+script = ExtResource("2_5l68f")

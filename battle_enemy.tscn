@@ -1,0 +1,102 @@
+[gd_scene load_steps=15 format=3 uid="uid://bomu4vtsy5dpt"]
+
+[ext_resource type="Texture2D" uid="uid://ibgiyglk1xkj" path="res://Battle_UI_Art/circle_white.png" id="1_u1kt3"]
+[ext_resource type="PackedScene" uid="uid://q0logruv62iv" path="res://atb_bar.tscn" id="2_cmisi"]
+[ext_resource type="Script" uid="uid://50duxttesemx" path="res://BattleEnemy.cs" id="2_j7mgt"]
+[ext_resource type="Texture2D" uid="uid://ioa6wn5wwboi" path="res://Battle_UI_Art/Enemies/Bat-IdleFly.png" id="4_m8k6a"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3rfcl"]
+atlas = ExtResource("4_m8k6a")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0sxcy"]
+atlas = ExtResource("4_m8k6a")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rxxal"]
+atlas = ExtResource("4_m8k6a")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i0g62"]
+atlas = ExtResource("4_m8k6a")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2th86"]
+atlas = ExtResource("4_m8k6a")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_frl4f"]
+atlas = ExtResource("4_m8k6a")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yjvfu"]
+atlas = ExtResource("4_m8k6a")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o1187"]
+atlas = ExtResource("4_m8k6a")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r7w75"]
+atlas = ExtResource("4_m8k6a")
+region = Rect2(512, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_psvfb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3rfcl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0sxcy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rxxal")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i0g62")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2th86")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_frl4f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yjvfu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o1187")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r7w75")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[node name="E1" type="TextureButton"]
+self_modulate = Color(0.976471, 1, 0, 0)
+offset_left = 134.0
+offset_top = 197.0
+offset_right = 246.0
+offset_bottom = 309.0
+texture_normal = ExtResource("1_u1kt3")
+script = ExtResource("2_j7mgt")
+
+[node name="ATBBar" parent="." instance=ExtResource("2_cmisi")]
+custom_minimum_size = Vector2(140, 15)
+layout_mode = 0
+offset_left = -8.0
+offset_top = 120.0
+offset_right = 132.0
+offset_bottom = 135.0
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(63, 39)
+scale = Vector2(3.10938, 2.9286)
+sprite_frames = SubResource("SpriteFrames_psvfb")
+animation = &"Idle"
+frame_progress = 0.907686
+flip_h = true

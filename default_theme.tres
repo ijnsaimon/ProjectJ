@@ -1,5 +1,45 @@
-[gd_resource type="Theme" format=3 uid="uid://bfvuuvvtsv3ph"]
+[gd_resource type="Theme" load_steps=8 format=3 uid="uid://bfvuuvvtsv3ph"]
+
+[ext_resource type="FontFile" uid="uid://c528qixkhipon" path="res://fonts/upheavtt.ttf" id="1_e7bfs"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e7bfs"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3taad"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7j863"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7j863"]
+bg_color = Color(0.67451, 0.196078, 0.196078, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e7bfs"]
+bg_color = Color(0.67451, 0.196078, 0.196078, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3taad"]
+bg_color = Color(0, 0.695474, 0.619659, 1)
 
 [resource]
+Button/colors/font_color = Color(0.67451, 0.196078, 0.196078, 1)
+Button/colors/font_focus_color = Color(0, 0.694118, 0.619608, 1)
+Button/colors/font_hover_color = Color(0, 0.694118, 0.619608, 1)
+Button/colors/font_pressed_color = Color(0, 0.694118, 0.619608, 1)
+Button/font_sizes/font_size = 28
+Button/fonts/font = ExtResource("1_e7bfs")
+Button/styles/focus = SubResource("StyleBoxEmpty_e7bfs")
+Button/styles/hover = SubResource("StyleBoxEmpty_3taad")
+Button/styles/normal = SubResource("StyleBoxEmpty_7j863")
+Button/styles/pressed = SubResource("StyleBoxFlat_7j863")
 HBoxContainer/constants/separation = 10
+Label/colors/font_color = Color(0.67451, 0.196078, 0.196078, 1)
+Label/font_sizes/font_size = 28
+Label/fonts/font = ExtResource("1_e7bfs")
+MarginContainer/constants/margin_bottom = 20
+MarginContainer/constants/margin_left = 20
+MarginContainer/constants/margin_right = 20
+MarginContainer/constants/margin_top = 20
+ProgressBar/colors/font_color = Color(0.67451, 0.196078, 0.196078, 1)
+ProgressBar/constants/outline_size = 0
+ProgressBar/font_sizes/font_size = 28
+ProgressBar/fonts/font = ExtResource("1_e7bfs")
+ProgressBar/styles/background = SubResource("StyleBoxFlat_e7bfs")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_3taad")
 VBoxContainer/constants/separation = 10

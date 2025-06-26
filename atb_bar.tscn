@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://q0logruv62iv"]
+
+[ext_resource type="Theme" uid="uid://bfvuuvvtsv3ph" path="res://default_theme.tres" id="1_v1gex"]
+[ext_resource type="Script" uid="uid://crrsuc1cee36s" path="res://ATBBar.cs" id="2_2ksh8"]
+
+[node name="ATBBar" type="ProgressBar"]
+custom_minimum_size = Vector2(0, 15)
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme = ExtResource("1_v1gex")
+value = 69.0
+show_percentage = false
+script = ExtResource("2_2ksh8")

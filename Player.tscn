@@ -1,0 +1,77 @@
+[gd_scene load_steps=11 format=3 uid="uid://djccj7af31v65"]
+
+[ext_resource type="Texture2D" uid="uid://ibgiyglk1xkj" path="res://Battle_UI_Art/circle_white.png" id="1_xhfnw"]
+[ext_resource type="Texture2D" uid="uid://mfsqvvhhxk7n" path="res://Battle_UI_Art/Players/KnightIdle.png" id="2_kpjcp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kne1u"]
+atlas = ExtResource("2_kpjcp")
+region = Rect2(0, 0, 96, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e80uo"]
+atlas = ExtResource("2_kpjcp")
+region = Rect2(96, 0, 96, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cxr5p"]
+atlas = ExtResource("2_kpjcp")
+region = Rect2(192, 0, 96, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tdg3f"]
+atlas = ExtResource("2_kpjcp")
+region = Rect2(288, 0, 96, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dtqjt"]
+atlas = ExtResource("2_kpjcp")
+region = Rect2(384, 0, 96, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ncpa"]
+atlas = ExtResource("2_kpjcp")
+region = Rect2(480, 0, 96, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wi0c6"]
+atlas = ExtResource("2_kpjcp")
+region = Rect2(576, 0, 96, 84)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xhfnw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kne1u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e80uo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cxr5p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tdg3f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dtqjt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ncpa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wi0c6")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[node name="P1" type="TextureButton"]
+self_modulate = Color(0, 1, 0, 0)
+offset_left = 65.0
+offset_top = 35.9997
+offset_right = 177.0
+offset_bottom = 148.0
+texture_normal = ExtResource("1_xhfnw")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(56, 49.0003)
+scale = Vector2(1.66667, 1.66667)
+sprite_frames = SubResource("SpriteFrames_xhfnw")
+animation = &"Idle"
+frame_progress = 0.835106
+flip_h = true
