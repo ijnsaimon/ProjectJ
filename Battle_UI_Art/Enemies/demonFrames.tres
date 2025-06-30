@@ -1,0 +1,39 @@
+[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://dhjo6ak4ov3ae"]
+
+[ext_resource type="Texture2D" uid="uid://e46633016b0d" path="res://Battle_UI_Art/Enemies/flyingDemonIdle.png" id="1_d8kfb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_crhmq"]
+atlas = ExtResource("1_d8kfb")
+region = Rect2(0, 0, 79, 69)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jmx2k"]
+atlas = ExtResource("1_d8kfb")
+region = Rect2(79, 0, 79, 69)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xmbyd"]
+atlas = ExtResource("1_d8kfb")
+region = Rect2(158, 0, 79, 69)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h107h"]
+atlas = ExtResource("1_d8kfb")
+region = Rect2(237, 0, 79, 69)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_crhmq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jmx2k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xmbyd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h107h")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]

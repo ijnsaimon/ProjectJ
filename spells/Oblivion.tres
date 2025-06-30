@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Spell" load_steps=2 format=3 uid="uid://dl4yg07jv0oom"]
+
+[ext_resource type="Script" uid="uid://dnr2tiskrec3" path="res://Spell.cs" id="1_1tsg1"]
+
+[resource]
+script = ExtResource("1_1tsg1")
+spellName = "Oblivion"
+type = 0
+target = 0
+receiver = 0
+hpChange = 99999
+mpCost = 15
+EffectColor = Color(0.00524137, 0, 0.490481, 1)
+EffectDuration = 2.5
+metadata/_custom_type_script = "uid://dnr2tiskrec3"

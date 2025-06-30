@@ -5,33 +5,31 @@ using System.Linq;
 // TODO Receivers
 public partial class Party : Node
 {
-	static public List<Spell> Warrior = new List<Spell>{
-		{new Spell("Protect", Spell.Target.SINGLE, Spell.Type.STATUS, Spell.Receiver.PLAYER, 0, 2)}
-	};
-	static public List<Spell> Assassin = new List<Spell>{
-		{new Spell("Shadow Ball", Spell.Target.SINGLE, Spell.Type.DAMAGE, Spell.Receiver.ENEMY, 55, 3)},
-		{new Spell("Small Heal", Spell.Target.SINGLE, Spell.Type.HEAL, Spell.Receiver.PLAYER, 15, 3)}
-	};
-	static public List<Spell> SunMage = new List<Spell>{
-		{new Spell("Sunny Day", Spell.Target.MULTI, Spell.Type.HEAL, Spell.Receiver.PLAYER, 30, 5)},
-		{new Spell("Re-Creation", Spell.Target.SINGLE, Spell.Type.STATUS, Spell.Receiver.PLAYER, 1, 10)},
-		{new Spell("Wall Of Fire", Spell.Target.MULTI, Spell.Type.DAMAGE, Spell.Receiver.ENEMY, 95, 5)},
-		{new Spell("Warm Sensation", Spell.Target.SINGLE, Spell.Type.HEAL, Spell.Receiver.PLAYER, 60, 5)}
-	};
-	static public List<Spell> MoonMage = new List<Spell>{
-		{new Spell("Oblivion", Spell.Target.SINGLE, Spell.Type.DAMAGE, Spell.Receiver.ENEMY, 99999, 15)},
-		{new Spell("Posion Gas", Spell.Target.MULTI, Spell.Type.STATUS, Spell.Receiver.ENEMY, 0, 5)},
-		{new Spell("Soul Drain", Spell.Target.SINGLE, Spell.Type.DAMAGE, Spell.Receiver.ENEMY, 60, 5)},
-		{new Spell("Dark Spikes", Spell.Target.MULTI, Spell.Type.DAMAGE, Spell.Receiver.ENEMY, 100, 10)}
-	};
-	public static Dictionary<String, BattleActor> players = new Dictionary<String, BattleActor>{
-		{"Christopher", new BattleActor("Christopher", 600, 5, 55, Warrior)},
-		{"Abigail", new BattleActor("Abigail", 320, 25, 10, MoonMage)},
-		{"Samuel", new BattleActor("Samuel", 280, 10, 50, Assassin)},
-		{"Lucia", new BattleActor("Lucia", 400, 35, 10, SunMage)}
-	};
-	public static BattleActor[] party = players.Values.ToArray();
+	public static Dictionary<String, BattleActor> players;
+	public static BattleActor[] party;
 	public Party(){
-		Utility.SetKeys(players);
+		GD.Print("Party");
+		var protectSpell = GD.Load<Spell>("res://spells/Protect.tres");
+		var smallHealSpell = GD.Load<Spell>("res://spells/SmallHeal.tres");
+		var shadowBallSpell = GD.Load<Spell>("res://spells/ShadowBall.tres");
+		var sunnyDaySpell = GD.Load<Spell>("res://spells/SunnyDay.tres");
+		var recreationSpell = GD.Load<Spell>("res://spells/Recreation.tres");
+		var wallOfFireSpell = GD.Load<Spell>("res://spells/WallOfFire.tres");
+		var warmthSpell = GD.Load<Spell>("res://spells/Warmth.tres");
+		var oblivionSpell = GD.Load<Spell>("res://spells/Oblivion.tres");
+		var poisonGasSpell = GD.Load<Spell>("res://spells/PoisonGas.tres");
+		var soulDrainSpell = GD.Load<Spell>("res://spells/SoulDrain.tres");
+		var darkSpikesSpell = GD.Load<Spell>("res://spells/DarkSpikes.tres");
+		var warriorSpells = new List<Spell> {protectSpell};
+		var assassinSpells = new List<Spell> {smallHealSpell, shadowBallSpell};
+		var sunMageSpells = new List <Spell> {sunnyDaySpell, recreationSpell, wallOfFireSpell, warmthSpell};
+		var moonMageSpells = new List <Spell> {oblivionSpell, poisonGasSpell, soulDrainSpell, darkSpikesSpell};
+		players = new Dictionary<String, BattleActor>{
+			{"Christopher", new BattleActor("Christopher", 600, 5, 55, warriorSpells)},
+			{"Abigail", new BattleActor("Abigail", 320, 25, 10, moonMageSpells)},
+			{"Samuel", new BattleActor("Samuel", 280, 10, 50, assassinSpells)},
+			{"Lucia", new BattleActor("Lucia", 400, 35, 10, sunMageSpells)}
+		};
+		party = players.Values.ToArray();
 	}
 }

@@ -20,6 +20,8 @@ public partial class BattleActor : Resource
 	public int mp {get; set; } = 5;
 	[Export]
 	public int strength { get; set; } = 5;
+	[Export]
+	public SpriteFrames Frames { get; set; }
 	public List<Spell> Spells {get; set; } = null;
 	public bool isAlive = true;
 	public bool Poisoned = false;
@@ -55,6 +57,12 @@ public partial class BattleActor : Resource
 		max_hp = health;
 		hp = max_hp;
 		name = s;
+	}
+	public BattleActor(String s, int health, int Strength){
+		max_hp = health;
+		hp = max_hp;
+		name = s;
+		strength = Strength;
 	}
 	public void SetName(String s){
 		name = s;

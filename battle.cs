@@ -263,14 +263,26 @@ public partial class battle : Control
 				if(target.Protected){
 					target.Protected = false;
 					GD.Print(target.GetName() + "protected themselves");
+					if (buttonMap.TryGetValue(target, out BattleButton targetNode))
+					{
+						targetNode.PlayVFX(new Color(2, 2, 2), 0.2f);
+					}
 					target.HealOrDamage(0);
 				}
 				else if(target.Defending){
 					target.Defending = false;
 					GD.Print(target.GetName() + "defended themselves - damage lowered");
+					if (buttonMap.TryGetValue(target, out BattleButton targetNode))
+					{
+						targetNode.PlayVFX(new Color(2, 2, 2), 0.2f);
+					}
 					target.HealOrDamage(-((int) Math.Round((double) actor.GetStrength())/3));
 				}
 				else{
+					if (buttonMap.TryGetValue(target, out BattleButton targetNode))
+					{
+						targetNode.PlayVFX(new Color(2, 2, 2), 0.2f);
+					}
 					target.HealOrDamage(-(actor.GetStrength()));
 				}
 			}
@@ -278,6 +290,12 @@ public partial class battle : Control
 		if(ev.Action == Actions.MAGIC && actor.isAlive){
 			// TODO Case for currSpell with usage
 			foreach(var target in targets){
+				if(currSpell.EffectColor.A > 0){
+					if(buttonMap.TryGetValue(target, out BattleButton targetNode))
+					{
+						targetNode.PlayVFX(currSpell.EffectColor, currSpell.EffectDuration);
+					}
+				}
 				switch(currSpell.spellName){
 					case "Protect":
 						target.Protected = true;

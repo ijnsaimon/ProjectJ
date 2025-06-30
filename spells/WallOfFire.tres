@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Spell" load_steps=2 format=3 uid="uid://b807d47mggyrc"]
+
+[ext_resource type="Script" uid="uid://dnr2tiskrec3" path="res://Spell.cs" id="1_8wp73"]
+
+[resource]
+script = ExtResource("1_8wp73")
+spellName = "Wall Of Fire"
+type = 0
+target = 1
+receiver = 0
+hpChange = 95
+mpCost = 9
+EffectColor = Color(1, 0.435294, 0, 1)
+EffectDuration = 1.5
+metadata/_custom_type_script = "uid://dnr2tiskrec3"

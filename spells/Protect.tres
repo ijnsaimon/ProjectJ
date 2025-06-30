@@ -10,6 +10,6 @@ target = 0
 receiver = 1
 hpChange = 0
 mpCost = 2
-EffectColor = Color(1, 1, 1, 0)
+EffectColor = Color(0.000134574, 0.974219, 0.99293, 1)
 EffectDuration = 0.5
 metadata/_custom_type_script = "uid://dnr2tiskrec3"

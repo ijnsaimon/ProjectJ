@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Spell" load_steps=2 format=3 uid="uid://r0573dbrudip"]
+
+[ext_resource type="Script" uid="uid://dnr2tiskrec3" path="res://Spell.cs" id="1_wymcn"]
+
+[resource]
+script = ExtResource("1_wymcn")
+spellName = "Shadow Ball"
+type = 0
+target = 0
+receiver = 0
+hpChange = 65
+mpCost = 3
+EffectColor = Color(0.25098, 0.141176, 0.545098, 1)
+EffectDuration = 0.5
+metadata/_custom_type_script = "uid://dnr2tiskrec3"

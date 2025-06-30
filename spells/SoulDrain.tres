@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Spell" load_steps=2 format=3 uid="uid://bnmc56fgeg23f"]
+
+[ext_resource type="Script" uid="uid://dnr2tiskrec3" path="res://Spell.cs" id="1_gyf01"]
+
+[resource]
+script = ExtResource("1_gyf01")
+spellName = "Soul Drain"
+type = 0
+target = 0
+receiver = 0
+hpChange = 60
+mpCost = 5
+EffectColor = Color(0.726232, 0, 0, 1)
+EffectDuration = 0.5
+metadata/_custom_type_script = "uid://dnr2tiskrec3"

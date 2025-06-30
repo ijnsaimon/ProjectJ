@@ -1,0 +1,74 @@
+[gd_resource type="SpriteFrames" load_steps=11 format=3 uid="uid://i5oru5anw6ss"]
+
+[ext_resource type="Texture2D" uid="uid://ioa6wn5wwboi" path="res://Battle_UI_Art/Enemies/Bat-IdleFly.png" id="1_t7nux"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ymwkb"]
+atlas = ExtResource("1_t7nux")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cn2vv"]
+atlas = ExtResource("1_t7nux")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_elebk"]
+atlas = ExtResource("1_t7nux")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_50ic7"]
+atlas = ExtResource("1_t7nux")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e7y16"]
+atlas = ExtResource("1_t7nux")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iii7k"]
+atlas = ExtResource("1_t7nux")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kbuwr"]
+atlas = ExtResource("1_t7nux")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oqerd"]
+atlas = ExtResource("1_t7nux")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vjy7l"]
+atlas = ExtResource("1_t7nux")
+region = Rect2(512, 0, 64, 64)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ymwkb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cn2vv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_elebk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_50ic7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e7y16")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iii7k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kbuwr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oqerd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vjy7l")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]

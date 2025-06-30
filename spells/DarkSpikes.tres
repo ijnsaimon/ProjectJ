@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Spell" load_steps=2 format=3 uid="uid://chesjqwgq4l5m"]
+
+[ext_resource type="Script" uid="uid://dnr2tiskrec3" path="res://Spell.cs" id="1_vkujv"]
+
+[resource]
+script = ExtResource("1_vkujv")
+spellName = "Dark Spikes"
+type = 0
+target = 1
+receiver = 0
+hpChange = 100
+mpCost = 10
+EffectColor = Color(0.281623, 9.32533e-06, 0.221331, 1)
+EffectDuration = 1.0
+metadata/_custom_type_script = "uid://dnr2tiskrec3"

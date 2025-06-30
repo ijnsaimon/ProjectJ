@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Encounter" load_steps=2 format=3 uid="uid://brwtt3d07s7hs"]
+
+[ext_resource type="Script" uid="uid://dglk2timo4u7a" path="res://Encounter.cs" id="1_wouea"]
+
+[resource]
+script = ExtResource("1_wouea")
+EnemyTypes = Array[String](["Bat", "Bat", "Bat"])
+metadata/_custom_type_script = "uid://dglk2timo4u7a"
