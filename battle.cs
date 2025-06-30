@@ -1,13 +1,15 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 public partial class battle : Control
 {
 	enum States{
 		OPTIONS,
 		TARGETS,
-		MAGIC_OPTIONS
+		MAGIC_OPTIONS,
+		PLAYER_TARGETS
 	}
 	public enum Actions{
 		FIGHT,
@@ -36,6 +38,7 @@ public partial class battle : Control
 	List<BattleEnemy> aliveEnemies = new List<BattleEnemy>();
 	List<BattlePlayer> alivePlayers = new List<BattlePlayer>();
 	List<Button> spellButtonPool = new List<Button>();
+	Dictionary<BattleActor, BattleButton> buttonMap = new Dictionary<BattleActor, BattleButton>();
 	public override void _Ready()
 	{
 		options = GetNode<UiWindow>("Options");
@@ -67,6 +70,7 @@ public partial class battle : Control
 				aliveEnemies.Add(enemy);
 				enemy.AtbReady += () => OnEnemyAtbReady(enemy.GetData(), enemy);
 				enemy.EnemyDied += OnEnemyDied;
+				buttonMap[enemy.GetData()] = enemy;
 			}
 		}
 		spellOptions.Hide();
@@ -91,6 +95,7 @@ public partial class battle : Control
 			if(child is BattlePlayer p){
 				alivePlayers.Add(p);
 				p.PlayerDied += OnPlayerDied;
+				buttonMap[p.GetData()] = p;
 			}
 		}
 	}
@@ -100,14 +105,33 @@ public partial class battle : Control
 				case States.OPTIONS:
 					break;
 				case States.TARGETS:
-					state = States.OPTIONS;
-					optionsmenu.ButtonFocus(0);
+						if(action == Actions.MAGIC){
+							state = States.MAGIC_OPTIONS;
+							FillSpellMenu(player);
+							spellOptions.Show();
+							if(spellmenu.GetChildCount() > 0 && spellmenu.GetChild(0) is BaseButton spButton)
+							{
+								spButton.GrabFocus();
+							}
+						}
+					else{
+						state = States.OPTIONS;
+						optionsmenu.ButtonFocus(0);
+					}
 					break;
 				case States.MAGIC_OPTIONS:
 					state = States.OPTIONS;
 					spellOptions.Hide();
 					options.Show();
 					optionsmenu.ButtonFocus(0);
+					break;
+				case States.PLAYER_TARGETS:
+					state = States.MAGIC_OPTIONS;
+					spellOptions.Show();
+					if(spellmenu.GetChildCount() > 0 && spellmenu.GetChild(0) is BaseButton spellButton)
+					{
+						spellButton.GrabFocus();
+					}
 					break;
 			}
 		}
@@ -184,7 +208,6 @@ public partial class battle : Control
 					break;
 				case "Magic":
 					state = States.MAGIC_OPTIONS;
-					action = Actions.MAGIC;
 					FillSpellMenu(player);
 					spellOptions.Show();
 					if (spellmenu.GetChildCount() > 0 && spellmenu.GetChild(0) is BaseButton spellButton)
@@ -193,39 +216,107 @@ public partial class battle : Control
 					}
 					options.Hide();
 					break;
+				case "Defend":
+					List<BattleActor> targets;
+					action = Actions.DEFEND;
+					options.Hide();
+					player.Defending = true;
+					options.Show();
+					AdvanceQueue();	
+					break;
 			}
 		}
 	}
 	public void OnSpellButtonPressed(Spell chosenSpell){
+		if(player.mp < chosenSpell.mpCost){
+			GD.Print("No mp");
+			return;
+		}
 		currSpell = chosenSpell;
 		currSpell.receiver = chosenSpell.receiver; // TODO SELF TARGETING
 		action = Actions.MAGIC;
-		state = States.TARGETS;
 		spellOptions.Hide();
-		if(aliveEnemies.Count > 0){
+		if(currSpell.receiver == Spell.Receiver.ENEMY && aliveEnemies.Count > 0){
+			state = States.TARGETS;
 			aliveEnemies[0].GrabFocus();
 		}
+		else if(currSpell.receiver == Spell.Receiver.PLAYER && alivePlayers.Count > 0){
+			state = States.PLAYER_TARGETS;
+			alivePlayers[0].GrabFocus();
+		}
 	}
-	public void RunEvent(){
+	public async void RunEvent(){
 		if(event_queue.Count == 0){
 			return;
 		}
 		Event ev = event_queue.Dequeue();
 		BattleActor actor = ev.Actor;
 		List<BattleActor> targets = ev.Targets;
-		
-		if(ev.Action == Actions.FIGHT){
+		if(buttonMap.TryGetValue(actor, out BattleButton attacker)){
+			Vector2 direction = (attacker is BattlePlayer) ? Vector2.Left : Vector2.Right;
+			await attacker.PlayAttackAnimation(direction);
+		}
+		if(ev.Action == Actions.FIGHT && actor.isAlive){
 			GD.Print(actor.GetName() + " attacks");
 			foreach(var target in targets){
 				GD.Print(target.GetName() + " targeted");
-				target.HealOrDamage(-(actor.GetStrength()));
+				if(target.Protected){
+					target.Protected = false;
+					GD.Print(target.GetName() + "protected themselves");
+					target.HealOrDamage(0);
+				}
+				else if(target.Defending){
+					target.Defending = false;
+					GD.Print(target.GetName() + "defended themselves - damage lowered");
+					target.HealOrDamage(-((int) Math.Round((double) actor.GetStrength())/3));
+				}
+				else{
+					target.HealOrDamage(-(actor.GetStrength()));
+				}
 			}
 		}
-		if(ev.Action == Actions.MAGIC){
+		if(ev.Action == Actions.MAGIC && actor.isAlive){
 			// TODO Case for currSpell with usage
-			switch(currSpell){
-				case "Protect":
-					
+			foreach(var target in targets){
+				switch(currSpell.spellName){
+					case "Protect":
+						target.Protected = true;
+						actor.UseMp(currSpell.mpCost);
+						break;
+					case "Wall Of Fire":
+						target.HealOrDamage(-(currSpell.hpChange));
+						actor.UseMp(currSpell.mpCost);
+						break;
+					case "Posion Gas":
+						target.Poisoned = true;
+						actor.UseMp(currSpell.mpCost);
+						break;
+					case "Oblivion":
+						int val = Global.RNG.Next(0, 101);
+						if(val <= 70){
+							target.HealOrDamage(-(currSpell.hpChange));
+							actor.UseMp(currSpell.mpCost);
+						}
+						else{
+							target.HealOrDamage(1);
+							actor.UseMp(currSpell.mpCost);
+						}
+						break;
+					case "Soul Drain":
+						target.HealOrDamage(-(currSpell.hpChange));
+						player.HealOrDamage(currSpell.hpChange/2);
+						actor.UseMp(currSpell.mpCost);
+						break;
+					default:
+						if(currSpell.receiver == Spell.Receiver.PLAYER){
+							target.HealOrDamage((currSpell.hpChange));
+						}
+						else
+							target.HealOrDamage(-(currSpell.hpChange));
+						actor.UseMp(currSpell.mpCost);
+						break;
+						
+				}
 			}
 		}
 		RunEvent();
@@ -299,42 +390,62 @@ public partial class battle : Control
 	
 	public void OnEnemiesButtonPressed(BattleEnemy button){
 		List<BattleActor> targets = new List<BattleActor>();
-		if(action = action.MAGIC){
-			if(currSpell.target = currSpell.Target.MULTI){
+		if(action == Actions.MAGIC){
+			if(currSpell.target == Spell.Target.MULTI){
 				foreach(BattleEnemy child in enemiesmenu.GetChildren()){
 					targets.Add(child.GetData());
 				}
 			}
+			else{
+				BattleActor target = button.GetData();
+				targets.Add(target);
+			}
 		}
-		BattleActor target = button.getData();
-		targets.Add(target);
+		else{
+			BattleActor target = button.GetData();
+			targets.Add(target);
+		}
 		state = States.OPTIONS;
 		Event ev = new Event(player, action, targets);
 		AddEvent(ev);
 		AdvanceQueue();
 	}
 	public void OnPlayersButtonPressed(BattlePlayer button){
-		
+		if(state!=States.PLAYER_TARGETS) return;
+		List<BattleActor> targets = new List<BattleActor>();
+		if(action == Actions.MAGIC && currSpell.target == Spell.Target.MULTI){
+			foreach(BattlePlayer actor in playersmenu.GetChildren()){
+				targets.Add(actor.GetData());
+			}
+		}
+		else{
+			BattleActor target = button.GetData();
+			targets.Add(target);
+			}
+		state = States.OPTIONS;
+		Event ev = new Event(player, action, targets);
+		AddEvent(ev);
+		AdvanceQueue();
 	}
-	public void Victory(){
+	public async void Victory(){
 		GD.Print("WIN");
 		Label victoryLabel = new Label();
 		victoryLabel.Text = "YOU WIN!";
-		// TODO -> Change this shit xd Im not a vibe coder
-		// TODO -> Dynamic Focus
-		victoryLabel.Set("theme_override_font_sizes/font_size", 48); // Ustaw rozmiar czcionki
+		victoryLabel.Set("theme_override_font_sizes/font_size", 48);
 		victoryLabel.SetAnchorsAndOffsetsPreset(Control.LayoutPreset.Center);
 		AddChild(victoryLabel);
+		await ToSignal(GetTree().CreateTimer(3.0f), SceneTreeTimer.SignalName.Timeout);
+		GetTree().ChangeSceneToFile("res://main_menu.tscn");
 	}
-	public void Defeat(){
+	public async void Defeat(){
 		GD.Print("WIN");
 		Label defeatLabel = new Label();
 		defeatLabel.Text = "YOU LOSE!";
-		// TODO -> Change this shit xd Im not a vibe coder
-		// TODO -> Dynamic Focus
-		defeatLabel.Set("theme_override_font_sizes/font_size", 48); // Ustaw rozmiar czcionki
+		defeatLabel.Set("theme_override_font_sizes/font_size", 48);
 		defeatLabel.SetAnchorsAndOffsetsPreset(Control.LayoutPreset.Center);
 		AddChild(defeatLabel);
+		await ToSignal(GetTree().CreateTimer(3.0f), SceneTreeTimer.SignalName.Timeout);
+		GetTree().ChangeSceneToFile("res://main_menu.tscn");
 	}
 	public void OnEnemyDied(BattleEnemy deadEnemy){
 		GD.Print($"{deadEnemy.EnemyType} defeated");

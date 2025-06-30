@@ -1,0 +1,52 @@
+[gd_scene load_steps=4 format=3 uid="uid://cq1pql440ibjy"]
+
+[ext_resource type="Theme" uid="uid://bfvuuvvtsv3ph" path="res://default_theme.tres" id="1_ch2fr"]
+[ext_resource type="Script" uid="uid://85wv1e8x2hxp" path="res://MainOptions.cs" id="1_wcmad"]
+[ext_resource type="Script" uid="uid://bk4aa7f553foo" path="res://Menu.cs" id="2_wcmad"]
+
+[node name="MainOptions" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wcmad")
+
+[node name="Background" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.133333, 0.12549, 0.203922, 1)
+
+[node name="ButtonBox" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -388.0
+offset_top = -193.0
+offset_right = 389.0
+offset_bottom = 353.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_ch2fr")
+script = ExtResource("2_wcmad")
+
+[node name="Button" type="Button" parent="ButtonBox"]
+layout_mode = 2
+theme = ExtResource("1_ch2fr")
+theme_override_font_sizes/font_size = 60
+text = "Fullscreen: OFF"
+
+[node name="Button3" type="Button" parent="ButtonBox"]
+layout_mode = 2
+theme = ExtResource("1_ch2fr")
+theme_override_font_sizes/font_size = 60
+text = "Back"

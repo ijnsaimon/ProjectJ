@@ -1,8 +1,12 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
-public partial class Spell : GodotObject
+
+[GlobalClass]
+public partial class Spell : Resource
 {
+	[Export]
 	public String spellName = "null";
 	public enum Target{
 		SINGLE,
@@ -17,11 +21,21 @@ public partial class Spell : GodotObject
 		ENEMY,
 		PLAYER
 	}
+	[Export]
 	public Type type;
+	[Export]
 	public Target target;
+	[Export]
 	public Receiver receiver;
+	[Export]
 	public int hpChange = 0;
+	[Export]
 	public int mpCost = 0;
+	[ExportGroup("VFX")]
+	[Export]
+	public Color EffectColor {get; set;} = new Color(1, 1, 1, 0);
+	[Export]
+	public float EffectDuration {get; set;} = 0.5f;
 	public Spell(){
 		
 	}

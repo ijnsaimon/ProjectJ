@@ -24,6 +24,7 @@ public partial class PlayerBar : HBoxContainer
 		var playersManager = GetNode<Party>("/root/Party");
 		data = Party.party[GetIndex()];
 		data.HpChanged += OnHpChanged;
+		data.MpChanged += OnMpChanged;
 	//	foreach(BattlePlayer player in party.GetChildren()){
 	//		if(player.GetData() == data){
 	//			thisPlayer = player;
@@ -47,6 +48,9 @@ public partial class PlayerBar : HBoxContainer
 	public void OnHpChanged(int newHp, int change){
 		hp.Text = newHp.ToString();
 		GD.Print("Hp: " + newHp);
+	}
+	public void OnMpChanged(int mewMp){
+		mp.Text = mewMp.ToString();
 	}
 	public void Highlight(){
 		animation.Play("highlight");

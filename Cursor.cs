@@ -22,31 +22,31 @@ public partial class Cursor : TextureRect
 		}
 	}
 	public void OnViewportGuiFocusChanged(Control node){
-		GD.Print("Focus changed! New focused node is: ", node.Name);
+	//	GD.Print("Focus changed! New focused node is: ", node.Name);
 		if(node is BaseButton button)
 		{
-			GD.Print($"Focus GRANTED to button: {button.Name}");
+	//		GD.Print($"Focus GRANTED to button: {button.Name}");
 			target = node;
 			Show();
 			SetProcess(true);
-			GD.Print(target.Name);
+		//	GD.Print(target.Name);
 		}
 		else{
 			if (node != null)
 			{
-				GD.PrintErr($"Focus LOST! Stolen by: '{node.Name}' (Type: {node.GetClass()})");
+	//			GD.PrintErr($"Focus LOST! Stolen by: '{node.Name}' (Type: {node.GetClass()})");
 				HideAndClearTarget();
 			}
 			else
 			{
-				GD.PrintErr("Focus LOST! New focus is null.");
+		//		GD.PrintErr("Focus LOST! New focus is null.");
 				HideAndClearTarget();
 			}
 		}
 	}
 	public void HideAndClearTarget()
 	{
-		GD.Print("Clearing");
+//		GD.Print("Clearing");
    		target = null;
 		Hide();
 		SetProcess(false);

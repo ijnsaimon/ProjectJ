@@ -6,6 +6,8 @@ public partial class BattleActor : Resource
 {
 	[Signal]
 	public delegate void HpChangedEventHandler(int hp, int change);
+	[Signal]
+	public delegate void MpChangedEventHandler(int mewMp);
 	[Export]
 	public String name { get; set; } = "null";
 	[Export]
@@ -72,5 +74,14 @@ public partial class BattleActor : Resource
 			isAlive = false;
 		}
 		EmitSignal(SignalName.HpChanged, hp, change);
+	}
+	public void UseMp(int val){
+		if(mp < val){
+			GD.Print("No mp");
+		}
+		else{
+			mp -= val;
+			EmitSignal(SignalName.MpChanged, mp);
+		}
 	}
 }
