@@ -30,7 +30,7 @@ public partial class BattleActor : Resource
 	public BattleActor(){
 		
 	}
-	public BattleActor(String Name, int MaxHp, int MaxMp, int Strength, List<Spell> spells){
+	public BattleActor(String Name, int MaxHp, int MaxMp, int Strength, List<Spell> spells, SpriteFrames frames){
 		name = Name;
 		max_hp = MaxHp;
 		hp = max_hp;
@@ -38,8 +38,9 @@ public partial class BattleActor : Resource
 		mp = max_mp;
 		strength = Strength;
 		Spells = spells;
+		Frames = frames;
 	}
-	public void Initialize(){
+	public void Initialize(BattleActor actor){
 		hp = max_hp;
 		isAlive = true;
 	}

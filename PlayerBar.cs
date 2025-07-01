@@ -16,22 +16,15 @@ public partial class PlayerBar : HBoxContainer
 	public bool dead = false;
 	public override void _Ready(){
 		animation = GetNode<AnimationPlayer>("BarAnimation");
-		label = GetNode<Label>("Name");
 		hp = GetNode<Label>("HP");
 		mp = GetNode<Label>("MP");
 		bar = GetNode<ATBBar>("ATBBar");
-//		party = GetNode<ControlMenu>("Party");
 		var playersManager = GetNode<Party>("/root/Party");
 		data = Party.party[GetIndex()];
 		data.HpChanged += OnHpChanged;
 		data.MpChanged += OnMpChanged;
-	//	foreach(BattlePlayer player in party.GetChildren()){
-	//		if(player.GetData() == data){
-	//			thisPlayer = player;
-	//		}
-	//	}
-	//	thisPlayer.PlayerDied += OnPlayerDied;
-		label.Text = data.GetName();
+		label = GetNode<Label>("Name");
+		label.Text = data.name;
 		hp.Text = data.hp.ToString();
 		mp.Text = data.mp.ToString();
 		bar.MaxValueReached += OnMaxValueReached;

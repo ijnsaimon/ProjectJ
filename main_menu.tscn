@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bj2rfm5w88ene"]
+[gd_scene load_steps=5 format=3 uid="uid://bj2rfm5w88ene"]
 
 [ext_resource type="Script" uid="uid://boxqovpx3lcer" path="res://MainMenu.cs" id="1_fu7sn"]
+[ext_resource type="Texture2D" uid="uid://cdim3fi3iu0xn" path="res://Battle_UI_Art/moon.png" id="2_glbon"]
 [ext_resource type="Theme" uid="uid://bfvuuvvtsv3ph" path="res://default_theme.tres" id="2_jix8l"]
 [ext_resource type="Script" uid="uid://bk4aa7f553foo" path="res://Menu.cs" id="3_glbon"]
 
@@ -25,7 +26,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.133333, 0.12549, 0.203922, 1)
+color = Color(0, 0, 0.141176, 1)
+
+[node name="SpriteMoon" type="Sprite2D" parent="."]
+position = Vector2(8, -192)
+scale = Vector2(10.6406, 10.6406)
+texture = ExtResource("2_glbon")
 
 [node name="ButtonBox" type="VBoxContainer" parent="."]
 layout_mode = 1

@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://c078fj7fpvgen"]
+[gd_scene load_steps=13 format=3 uid="uid://c078fj7fpvgen"]
 
 [ext_resource type="Theme" uid="uid://bfvuuvvtsv3ph" path="res://default_theme.tres" id="1_7sfm4"]
 [ext_resource type="Script" uid="uid://bhwp14cx033at" path="res://battle.cs" id="2_6t8i5"]
 [ext_resource type="PackedScene" uid="uid://1j1jis50q27i" path="res://ui_window.tscn" id="2_i431l"]
 [ext_resource type="FontFile" uid="uid://c528qixkhipon" path="res://fonts/upheavtt.ttf" id="3_6t8i5"]
+[ext_resource type="Texture2D" uid="uid://hjm8kpqak8v0" path="res://Battle_UI_Art/bgfight.png" id="3_sl0w2"]
 [ext_resource type="Script" uid="uid://clv461gm4ni41" path="res://ControlMenu.cs" id="4_0npn6"]
 [ext_resource type="PackedScene" uid="uid://1nm2b0x5qpem" path="res://player_bar.tscn" id="4_mhv3b"]
 [ext_resource type="Script" uid="uid://bk4aa7f553foo" path="res://Menu.cs" id="5_dw4jg"]
@@ -23,7 +24,7 @@ grow_vertical = 0
 theme = ExtResource("1_7sfm4")
 script = ExtResource("2_6t8i5")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -31,7 +32,7 @@ anchor_bottom = 1.0
 offset_top = 18.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.443296, 0.609613, 0.685539, 1)
+texture = ExtResource("3_sl0w2")
 
 [node name="BattleMenu" type="HBoxContainer" parent="."]
 custom_minimum_size = Vector2(1000, 240)
@@ -56,11 +57,13 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -186.0
+offset_left = 72.0
+offset_right = -114.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Enemies" type="VBoxContainer" parent="BattleMenu/Enemies/Margin"]
+custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -114,20 +117,20 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 1211.0
-offset_top = 209.0
-offset_right = -301.0
-offset_bottom = -291.0
+offset_left = 1197.0
+offset_top = 380.0
+offset_right = -315.0
+offset_bottom = -120.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("4_0npn6")
 
 [node name="P1" parent="Party" instance=ExtResource("6_b1i6x")]
 layout_mode = 0
-offset_left = 34.0
-offset_top = 12.9997
-offset_right = 146.0
-offset_bottom = 125.0
+offset_left = 42.0
+offset_top = 44.9997
+offset_right = 154.0
+offset_bottom = 157.0
 script = ExtResource("7_sl0w2")
 
 [node name="P2" parent="Party" instance=ExtResource("6_b1i6x")]
@@ -140,10 +143,10 @@ script = ExtResource("7_sl0w2")
 
 [node name="P3" parent="Party" instance=ExtResource("6_b1i6x")]
 layout_mode = 0
-offset_left = 131.0
-offset_top = 259.0
-offset_right = 243.0
-offset_bottom = 371.0
+offset_left = 147.0
+offset_top = 282.0
+offset_right = 259.0
+offset_bottom = 394.0
 script = ExtResource("7_sl0w2")
 
 [node name="P4" parent="Party" instance=ExtResource("6_b1i6x")]

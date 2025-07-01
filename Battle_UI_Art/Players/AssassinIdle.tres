@@ -1,0 +1,53 @@
+[gd_resource type="SpriteFrames" load_steps=8 format=3 uid="uid://cnlw4651p6trc"]
+
+[ext_resource type="Texture2D" uid="uid://ik2tbobbqnfn" path="res://Battle_UI_Art/Players/AssassinSheet.png" id="1_7heos"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_68ish"]
+atlas = ExtResource("1_7heos")
+region = Rect2(0, 0, 80, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wi5fd"]
+atlas = ExtResource("1_7heos")
+region = Rect2(80, 0, 80, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xyo1g"]
+atlas = ExtResource("1_7heos")
+region = Rect2(160, 0, 80, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xj0pr"]
+atlas = ExtResource("1_7heos")
+region = Rect2(240, 0, 80, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hnj56"]
+atlas = ExtResource("1_7heos")
+region = Rect2(320, 0, 80, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cjaak"]
+atlas = ExtResource("1_7heos")
+region = Rect2(400, 0, 80, 64)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_68ish")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wi5fd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xyo1g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xj0pr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hnj56")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cjaak")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]

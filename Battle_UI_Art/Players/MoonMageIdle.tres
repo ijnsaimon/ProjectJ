@@ -1,0 +1,60 @@
+[gd_resource type="SpriteFrames" load_steps=9 format=3 uid="uid://de0v8e6iaohkl"]
+
+[ext_resource type="Texture2D" uid="uid://c7j3aqvasg782" path="res://Battle_UI_Art/Players/SunMageIdle.png" id="1_asx22"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v7nun"]
+atlas = ExtResource("1_asx22")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pxrdt"]
+atlas = ExtResource("1_asx22")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cqld3"]
+atlas = ExtResource("1_asx22")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pauj1"]
+atlas = ExtResource("1_asx22")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3frjb"]
+atlas = ExtResource("1_asx22")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n1in1"]
+atlas = ExtResource("1_asx22")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nik2v"]
+atlas = ExtResource("1_asx22")
+region = Rect2(768, 0, 128, 128)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v7nun")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pxrdt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cqld3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pauj1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3frjb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n1in1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nik2v")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]

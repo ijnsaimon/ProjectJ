@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://ibgiyglk1xkj" path="res://Battle_UI_Art/circle_white.png" id="1_u1kt3"]
 [ext_resource type="PackedScene" uid="uid://q0logruv62iv" path="res://atb_bar.tscn" id="2_cmisi"]
 [ext_resource type="Script" uid="uid://50duxttesemx" path="res://BattleEnemy.cs" id="2_j7mgt"]
-[ext_resource type="SpriteFrames" uid="uid://dhjo6ak4ov3ae" path="res://Battle_UI_Art/Enemies/demonFrames.tres" id="4_m8k6a"]
+[ext_resource type="SpriteFrames" uid="uid://e7jdynsyv6gj" path="res://Battle_UI_Art/Enemies/skeletonFrames.tres" id="4_m8k6a"]
 
 [node name="E1" type="TextureButton"]
 self_modulate = Color(0.976471, 1, 0, 0)

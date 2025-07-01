@@ -2,6 +2,8 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Threading;
+using System.Linq;
 
 public partial class battle : Control
 {
@@ -39,6 +41,9 @@ public partial class battle : Control
 	List<BattlePlayer> alivePlayers = new List<BattlePlayer>();
 	List<Button> spellButtonPool = new List<Button>();
 	Dictionary<BattleActor, BattleButton> buttonMap = new Dictionary<BattleActor, BattleButton>();
+	volatile bool isAiThinking = false;
+	Event pendingEnemyEvent = null;
+	Queue<BattleEnemy> enemyActionQueue = new Queue<BattleEnemy>();
 	public override void _Ready()
 	{
 		options = GetNode<UiWindow>("Options");
@@ -80,7 +85,7 @@ public partial class battle : Control
 				int index = label.GetIndex();
 				foreach(BattleEnemy en in enemiesmenu.GetChildren()){
 					if(en.GetIndex() == index){
-						label.Text = en.GetData().GetName();
+						label.Text = en.GetData().name;
 					}
 				}
 			}
@@ -97,6 +102,21 @@ public partial class battle : Control
 				p.PlayerDied += OnPlayerDied;
 				buttonMap[p.GetData()] = p;
 			}
+		}
+	}
+	public override void _Process(double delta){
+		if(pendingEnemyEvent != null){
+			AddEvent(pendingEnemyEvent);
+			pendingEnemyEvent = null;
+		}
+		if (!isAiThinking && enemyActionQueue.Count > 0)
+		{
+		BattleEnemy currentEnemy = enemyActionQueue.Dequeue();
+		isAiThinking = true;
+		Thread aiThread = new Thread(() => CalculateEnemyMove(currentEnemy.GetData()));
+		aiThread.IsBackground = true;
+		aiThread.Start();
+		currentEnemy.ResetAtb();
 		}
 	}
 	public override void _UnhandledInput(InputEvent @event){
@@ -148,11 +168,12 @@ public partial class battle : Control
 			spellmenu.AddChild(noSpells);
 			return;
 		}
-		for(int i = 0; i < actor.Spells.Count; i++){
-			Spell spell = actor.Spells[i];
+		var sortedSpells = actor.Spells.OrderBy(spell => spell.spellName);
+		int ind = 0;
+		foreach(Spell spell in sortedSpells){
 			Button spellButton;
-			if(i < spellButtonPool.Count){
-				spellButton = spellButtonPool[i];
+			if(ind < spellButtonPool.Count){
+				spellButton = spellButtonPool[ind];
 			}
 			else{
 				spellButton = new Button();
@@ -162,6 +183,7 @@ public partial class battle : Control
 			spellButton.Text = $"{spell.spellName} ({spell.mpCost} MP)";
 			spellButton.Show();
 			ConnectSpellButton(spellButton, spell);
+			ind++;
 		}
 		spellmenu.UpdateFocus();
 		foreach(var child in spellmenu.GetChildren()){
@@ -386,24 +408,20 @@ public partial class battle : Control
 	}
 	
 	public void OnEnemyAtbReady(BattleActor enemyActor, BattleEnemy enemy){
-	//	GD.Print("enemy.ready");
-		if(alivePlayers.Count == 0) return;
-	//	GD.Print(alivePlayers.Count);
-		bool loop = true;
-		List<BattleActor> targets = new List<BattleActor>();
-		while(loop){
+		enemyActionQueue.Enqueue(enemy);
+	}
+	
+	public void CalculateEnemyMove(BattleActor enemyActor){
+		Thread.Sleep(1000);
+		if(alivePlayers.Count > 0){
 			int index = Global.RNG.Next(0, alivePlayers.Count);
 			BattleActor target = alivePlayers[index].GetData();
-			GD.Print(target.GetName() + " attacked");
-			if(target.isAlive)
-			{
-				targets.Add(target);
-				loop = false;
+			if(target.isAlive){
+				List<BattleActor> targets = new List<BattleActor> { target };
+				pendingEnemyEvent = new Event(enemyActor, Actions.FIGHT, targets);
 			}
 		}
-	 	Event ev = new Event(enemyActor, Actions.FIGHT, targets); //TODO custom enemy action
-		AddEvent(ev);
-		enemy.ResetAtb();
+		isAiThinking = false;
 	}
 	
 	public void OnEnemiesButtonPressed(BattleEnemy button){

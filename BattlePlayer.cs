@@ -12,6 +12,16 @@ public partial class BattlePlayer : BattleButton
 		players = GetNode<VBoxContainer>("/root/Battle/BattleMenu/Players/Margin/Players");
 		Initialize(playerData);
 		sprite = GetNodeOrNull<AnimatedSprite2D>("Sprite");
+		if (data.Frames != null)
+		{
+			sprite.SpriteFrames = data.Frames;
+		}
+		if(data.name == "Christopher"){
+			sprite.Scale = new Vector2(2.0f, 2.0f);
+		}
+		else if(data.name == "Samuel"){
+			sprite.Scale = new Vector2(2.5f, 2.5f);
+		}
 		sprite.Play("Idle");
 		int frameCount = sprite.SpriteFrames.GetFrameCount("Idle");
 		if(frameCount > 0)

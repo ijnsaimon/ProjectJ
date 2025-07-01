@@ -24,12 +24,19 @@ public partial class Party : Node
 		var assassinSpells = new List<Spell> {smallHealSpell, shadowBallSpell};
 		var sunMageSpells = new List <Spell> {sunnyDaySpell, recreationSpell, wallOfFireSpell, warmthSpell};
 		var moonMageSpells = new List <Spell> {oblivionSpell, poisonGasSpell, soulDrainSpell, darkSpikesSpell};
+		var warriorFrames = GD.Load<SpriteFrames> ("res://Battle_UI_Art/Players/KnightIdle.tres");
+		var moonFrames = GD.Load<SpriteFrames> ("res://Battle_UI_Art/Players/MoonMageIdle.tres");
+		var sunFrames = GD.Load<SpriteFrames> ("res://Battle_UI_Art/Players/SunMageIdle.tres");
+		var assassinFrames = GD.Load<SpriteFrames> ("res://Battle_UI_Art/Players/AssassinIdle.tres");
 		players = new Dictionary<String, BattleActor>{
-			{"Christopher", new BattleActor("Christopher", 600, 5, 55, warriorSpells)},
-			{"Abigail", new BattleActor("Abigail", 320, 25, 10, moonMageSpells)},
-			{"Samuel", new BattleActor("Samuel", 280, 10, 50, assassinSpells)},
-			{"Lucia", new BattleActor("Lucia", 400, 35, 10, sunMageSpells)}
+			{"Christopher", new BattleActor("Christopher", 600, 5, 55, warriorSpells, warriorFrames)},
+			{"Abigail", new BattleActor("Abigail", 320, 25, 10, moonMageSpells, moonFrames)},
+			{"Samuel", new BattleActor("Samuel", 280, 10, 50, assassinSpells, assassinFrames)},
+			{"Lucia", new BattleActor("Lucia", 400, 35, 10, sunMageSpells, sunFrames)}
 		};
 		party = players.Values.ToArray();
+		foreach(var player in party){
+			GD.Print(player.name);
+		}
 	}
 }

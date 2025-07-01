@@ -17,7 +17,6 @@ public partial class ATBBar : ProgressBar
 		if(Value == MaxValue){
 			SetProcess(false);
 			EmitSignal(SignalName.MaxValueReached);
-			// TODO ANIMATE
 		}
 	}
 	public void Reset(){
