@@ -16,7 +16,17 @@ public partial class MainOptions : Control
 					GetTree().ChangeSceneToFile("res://main_menu.tscn");
 					break;
 				default:
+					{
+					if(DisplayServer.WindowGetMode() == DisplayServer.WindowMode.Fullscreen){
+						DisplayServer.WindowSetMode(DisplayServer.WindowMode.Maximized);
+						button.Text = "Fullscreen: OFF";
+					}
+					else{
+						DisplayServer.WindowSetMode(DisplayServer.WindowMode.Fullscreen);
+						button.Text = "Fullscreen: ON";
+					}
 					break;
+					}
 			}
 		}
 	}

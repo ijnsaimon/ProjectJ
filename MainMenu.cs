@@ -7,6 +7,7 @@ public partial class MainMenu : Control
 	Menu options;
 	public override void _Ready(){
 		options = GetNode<Menu>("ButtonBox");
+		Input.MouseMode = Input.MouseModeEnum.Hidden;
 		sprite = GetNode<Sprite2D>("SpriteMoon");
 		options.ButtonPressed += OnMenuButtonPressed;
 		options.ButtonFocus(0);

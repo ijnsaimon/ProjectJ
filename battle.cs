@@ -46,6 +46,7 @@ public partial class battle : Control
 	Queue<BattleEnemy> enemyActionQueue = new Queue<BattleEnemy>();
 	public override void _Ready()
 	{
+		Input.MouseMode = Input.MouseModeEnum.Hidden;
 		options = GetNode<UiWindow>("Options");
 		spellOptions = GetNode<UiWindow>("MagicOptions");
 		spellmenu = GetNode<Menu>("MagicOptions/Spells");
